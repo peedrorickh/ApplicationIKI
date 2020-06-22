@@ -4,3 +4,4 @@ __pycache__
 venvIKI
 db.sqlite3
 .DS_Store
+.ideia
