@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
+#Model para atribuir Cargos
 class Cargo(models.Model):
     funcao = models.CharField(max_length=20)
     descricao = models.CharField(max_length=1000, null=True)
@@ -9,7 +10,7 @@ class Cargo(models.Model):
     def __str__(self):
         return self.funcao
 
-
+#Model para atribuir usuarios
 class Usuario(models.Model):
     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True)
     matricula = models.CharField(max_length=7)

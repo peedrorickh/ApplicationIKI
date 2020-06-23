@@ -29,7 +29,7 @@ body,html {
     width: 170px;
     top: -75px;
     border-radius: 50%;
-    background: #60a3bc;
+    background: #9b9d9e;
     padding: 10px;
     text-align: center;
 
@@ -39,7 +39,6 @@ body,html {
     width: 150px;
     border-radius: 50%;
     border: 2px solid white;
-    background-color: rgb(255, 255, 255);
 }
 .form_container {
     margin-top: 100px;
