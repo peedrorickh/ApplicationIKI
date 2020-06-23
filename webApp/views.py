@@ -5,8 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 @login_required
-def usuario(request):
-    return render(request, 'webApp/users.html', {})
+def Treinamentos(request):
+    return render(request, 'webApp/treinamento.html', {})
 
 
 class IndexTemplateView(LoginRequiredMixin, TemplateView):

@@ -10,8 +10,6 @@ app_name = 'webApp'
 urlpatterns = [
     path('', RedirectView.as_view(url='/accounts/login/')),
     path('home/', IndexTemplateView.as_view(), name="index"),
-
-    
-    path('', views.usuario, name='users'),
+    path('treinamentos/', views.Treinamentos, name='treinamentos'),
     
 ]
