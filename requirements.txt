@@ -1,1 +1,4 @@
 django
+django-crispy-forms
+django-widget-tweaks
+django-filter

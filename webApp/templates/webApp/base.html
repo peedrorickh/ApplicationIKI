@@ -18,59 +18,61 @@
         <a class="navbar-brand" href="">
           <img src="{% static 'website\img\minilogo.png' %}" height="30x">
         </a>
-        <button class="navbar-toggler" type="button" 
-          data-toggle="collapse" data-target="#navbarSupportedContent" 
-          aria-controls="navbarSupportedContent" aria-expanded="false" 
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+
+          <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" data-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
           <ul class="navbar-nav mr-auto">
-            <li class="menu-item">
-              <a class="nav-link" href="">Página Inicial</a>
-            </li>
-            <li class="menu-item">
-              <a class="nav-link" href=""></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href=""></a>
+             <li class="menu-item">
+                 <a class="nav-link" href="">Página Inicial</a>
+             </li>
+             <li class="menu-item">
+                 <a class="nav-link" href="">Treinamentos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href=""></a>
+                 <a class="nav-link" href=""></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="}"> </a>
+                 <a class="nav-link" href=""></a>
+            </li>
+            <li class="nav-item">
+                 <a class="nav-link" href="}"> </a>
             </li>
           </ul>
+
           <ul class="navbar-nav float-right">
             <li class="nav-item"> 
-              {% if user.is_superuser %}
-              <a class="nav-link" href="{% url 'admin:index' %}"
-              rel="noopener noreferrer" target="_blank">Bem vindo <b>{{ user.username }}</b></a>
+            {% if user.is_superuser %}
+                 <a class="nav-link" href="{% url 'admin:index' %}"
+                    rel="noopener noreferrer" target="_blank">Bem vindo <b>{{ user.username }}</b></a>
               <li>
-                <a class="nav-link" 
-                href=""
+                <a class="nav-link" href=""
                 el="noopener noreferrer" target="_blank"></a>
               </li>
               <li>
                 <a class="nav-link" href=""></a>
               </li>
-              {% else %}
+            {% else %}
                 <a class="nav-link">Bem vindo <b>{{ user.username }}</b></a>
-              {% endif %}
+            {% endif %}
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Logout</a>
+                <a class="nav-link" href="{% url 'logout' %">Logout</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"><b></b></a>
+                <a class="nav-link"><b></b></a>
             </li>
           </ul>
-        </div>
+        </div> 
       </nav>
             {% block content %}
             {% endblock %}
-    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
