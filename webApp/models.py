@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 #Model para atribuir Cargos
 class Cargo(models.Model):
@@ -14,13 +15,14 @@ class Cargo(models.Model):
 class Usuario(models.Model):
     cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True)
     matricula = models.CharField(max_length=7)
+    usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    email = models.CharField(max_length=40)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    email = models.CharField(max_length=40)
     
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.first_name
 
 #Model Para publicar Treinamento
 
@@ -37,4 +39,12 @@ class Treinamento(models.Model):
 
     def __str__(self):
         return self.title
-   
+
+#Teste postagem treinamento like a blog
+
+class Post(models.Model):
+    titile = models.CharField(max_length=255)
+    resume = models.CharField(max_length=255)
+    content = models.TextField()
+    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    created_at = models.DateField(auto_now=True)

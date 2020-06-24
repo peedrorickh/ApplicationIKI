@@ -53,7 +53,7 @@
             <li class="nav-item"> 
             {% if user.is_staff %}
                  <a class="nav-link" href="{% url 'admin:index' %}"
-                    rel="noopener noreferrer">Bem vindo <b>{{ user.username }}</b></a>
+                    rel="noopener noreferrer">Bem vindo <b>{{ user.first_name }}</b></a>
               <li>
                 <a class="nav-link" href=""
                 el="noopener noreferrer" target="_blank"></a>
@@ -62,7 +62,7 @@
                 <a class="nav-link" href=""></a>
               </li>
             {% elif user.is_authenticated %}
-                <a class="nav-link">Bem vindo <b>{{ user.username }}</b></a>
+                <a class="nav-link">Bem vindo <b>{{ user.first_name }} {{ user.last_name }}</b></a>
             {% endif %}
             </li>
             {% if user.is_authenticated %}
