@@ -13,12 +13,13 @@ class Cargo(models.Model):
 
 #Model para atribuir usuarios
 class Usuario(models.Model):
-    cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True)
+    cargo = models.ForeignKey(GROU)
     matricula = models.CharField(max_length=7)
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     email = models.CharField(max_length=40)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    
     
 
     def __str__(self):
