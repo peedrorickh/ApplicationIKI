@@ -3,6 +3,9 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
+
+"""
 #Model para atribuir Cargos
 class Cargo(models.Model):
     funcao = models.CharField(max_length=20)
@@ -52,3 +55,30 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titile
+
+"""
+class Cargo(models.Model):
+    funcao = models.TextField(max_length=20)
+    descricao = models.TextField(max_length=50)
+
+class US(models.Model):
+    regiao = models.TextField(max_length=15)
+    us = models.TextField(max_length=15)
+    agencia = models.TextField(max_length=15)
+
+class Users(models.Model):
+    cpf = models.IntegerField(max_length=11)
+    telefone = models.IntegerField(max_length=9)
+    primeiro_nome = models.TextField(max_length=30)
+    ultimo_nome = models.TextField(max_length=30)
+    matricula = models.TextField(max_length=7)
+    cargo = models.ForeignKey(US, on_delete=models.DO_NOTHING)
+    us = models.ForeignKey(Cargo.funcao, on_delete=models.DO_NOTHING)
+    email = models.EmailField()
+
+class Treinamento(models.Model):
+    autor = models.ForeignKey(User,settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    titulo =  models.TextField(max_length=25)
+    resumo = models.TextField(max_length=25)
+    dt_publicacao = models.DateField(auto_now=True)
+    publicacao = models.TextField()
