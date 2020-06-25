@@ -2,79 +2,7 @@
 {% load static %}
 
 {% block content %}
-  <main role="main" class="container-fluid" style="padding:5%;">
-  <div class="row">
-    <div class="col-md-8 blog-main">
-      <h3 class="pb-4 mb-4 font-italic border-bottom">
-        From the Firehose
-      </h3>
-
-      {% for treinamento in treinamento %}
-      <div class="blog-post">
-        <h2 class="blog-post-title">
-          <a href="/treinamento/{{treinamento.pk}}"> 
-            {{treinamento.title}}
-          </a>
-        </h2>
-        <p class="blog-post-meta">
-              {{treinamento.dt_publicacao|date:'d, M Y'}}
-           <a href="#">{{treinamento.autor.get_autor}}
-           </a>
-       </p>
-           {{treinamento.publicacao|safe}} 
-      </div><!-- /.blog-post -->
-  <!--
-      <div class="blog-post">
-        <h2 class="blog-post-title">New feature</h2>
-        <p class="blog-post-meta">December 14, 2013 by <a href="#">Chris</a></p>
   
-      
-      </div><!-- /.blog-post -->
-     {% endfor %}
-      <nav class="blog-pagination">
-        <a class="btn btn-outline-primary" href="#">Antigo</a>
-        <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Novo</a>
-      </nav>
   
-    </div><!-- /.blog-main -->
   
-    <aside class="col-md-4 blog-sidebar">
-      <div class="p-4 mb-3 bg-light rounded">
-        <h4 class="font-italic">Bio</h4>
-        <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-      </div>
-  
-      <div class="p-4">
-        <h4 class="font-italic">Possivel destaque</h4>
-        <ol class="list-unstyled mb-0">
-          <li><a href="#">Fulano</a></li>
-          <li><a href="#">Ciclano</a></li>
-          <li><a href="#">Beltrano</a></li>
-          <li><a href="#">Fulano</a></li>
-          <li><a href="#">Ciclano</a></li>
-          <li><a href="#">Beltrano</a></li>
-        </ol>
-      </div>
-  
-      <div class="p-4">
-        <h4 class="font-italic">Teste</h4>
-        <ol class="list-unstyled">
-          <li><a href="#">Teste</a></li>
-          <li><a href="#">Teste</a></li>
-          <li><a href="#">Teste</a></li>
-        </ol>
-      </div>
-    </aside><!-- /.blog-sidebar -->
-  
-  </div><!-- /.row -->
-  
-  </main><!-- /.container -->
-  
-  <footer class="blog-footer">
-    <div class="d-flex justify-content-center mt-3">
-    <button class="btn btn-dark btn-lg btn-block">
-      <a href="#">Voltar ao topo</a>
-    </button>
-  </div>
-  </footer>
 {% endblock %}
