@@ -1,11 +1,13 @@
 from django.contrib import admin
-from .models import Usuario, Cargo, Treinamento, Post
+from .models import Funcionario, US, Cargo, Treinamento, Provas
 # Register your models here.
 
-admin.site.register(Usuario)
+admin.site.register(Funcionario)
 admin.site.register(Cargo)
 admin.site.register(Treinamento)
-admin.site.register(Post)
+admin.site.register(US)
+admin.site.register(Provas)
+
 
 
 admin.site.site_header = 'Administração'

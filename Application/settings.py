@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
+    'djrichtextfield',
 
 ]
 
@@ -104,7 +105,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+DJRICHTEXTFIELD_CONFIG = {
+    'js': ['//cdn.ckeditor.com/4.14.1/standard/ckeditor.js'],
+    'init_template': 'djrichtextfield/init/ckeditor.js',
+    'settings': {  
+    'toolbar': [
+        {'items': ['Format', '-', 'Bold', 'Italic', '-',
+                   'RemoveFormat']},
+        {'items': ['Link', 'Unlink', 'Image', 'Table']},
+        {'items': ['Source']}
+    ],
+    'format_tags': 'p;h1;h2;h3',
+    'width': 700
+}
+}
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -128,4 +142,4 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-CKEDITOR_UPLOAD_PATH = 'upload/'
+CKEDITOR_UPLOAD_PATH = 'uploads/'

@@ -2,8 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import User
-
-
+from djrichtextfield.models import RichTextField
 
 """
 #Model para atribuir Cargos
@@ -57,28 +56,44 @@ class Post(models.Model):
         return self.titile
 
 """
+
+
 class Cargo(models.Model):
-    funcao = models.TextField(max_length=20)
+    funcao = models.CharField(max_length=20)
     descricao = models.TextField(max_length=50)
 
 class US(models.Model):
-    regiao = models.TextField(max_length=15)
-    us = models.TextField(max_length=15)
-    agencia = models.TextField(max_length=15)
+    regiao = models.CharField(max_length=15)
+    us = models.CharField(max_length=15)
+    agencia = models.CharField(max_length=15)
 
-class Users(models.Model):
-    cpf = models.IntegerField(max_length=11)
-    telefone = models.IntegerField(max_length=9)
-    primeiro_nome = models.TextField(max_length=30)
-    ultimo_nome = models.TextField(max_length=30)
-    matricula = models.TextField(max_length=7)
-    cargo = models.ForeignKey(US, on_delete=models.DO_NOTHING)
-    us = models.ForeignKey(Cargo.funcao, on_delete=models.DO_NOTHING)
+class Funcionario(models.Model):
+    cpf = models.IntegerField()
+    telefone = models.CharField(max_length=9)
+    primeiro_nome = models.CharField(max_length=30)
+    ultimo_nome = models.CharField(max_length=30)
+    matricula = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    cargo = models.ForeignKey(Cargo, on_delete=models.DO_NOTHING)
+    us = models.ForeignKey(US, on_delete=models.DO_NOTHING)
     email = models.EmailField()
 
+    def __str__(self):
+        return self.primeiro_nome
+
 class Treinamento(models.Model):
-    autor = models.ForeignKey(User,settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    titulo =  models.TextField(max_length=25)
-    resumo = models.TextField(max_length=25)
+    titulo =  models.CharField(max_length=25)
+    autor = models.CharField(max_length=20)
+    resumo = RichTextField()
     dt_publicacao = models.DateField(auto_now=True)
-    publicacao = models.TextField()
+    publicacao = RichTextField()
+    
+    def __str__(self):
+        return self.titulo
+
+class Provas(models.Model):
+        nota = models.IntegerField()
+        titulo = models.ForeignKey(Treinamento, on_delete=models.DO_NOTHING)
+        aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
+        
+        def __str__(self):
+            return (str(self.aluno))
