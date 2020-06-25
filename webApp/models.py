@@ -57,31 +57,36 @@ class Post(models.Model):
 
 """
 
-
 class Cargo(models.Model):
     funcao = models.CharField(max_length=20)
     descricao = models.TextField(max_length=50)
+
+    def __str__(self):
+         return self.funcao
 
 class US(models.Model):
     regiao = models.CharField(max_length=15)
     us = models.CharField(max_length=15)
     agencia = models.CharField(max_length=15)
 
+    def __str__(self):
+        return self.us
+
 class Funcionario(models.Model):
-    cpf = models.IntegerField()
+    cpf = models.IntegerField(verbose_name='cpf' , null=False, blank=False, unique=True)
     telefone = models.CharField(max_length=9)
     primeiro_nome = models.CharField(max_length=30)
     ultimo_nome = models.CharField(max_length=30)
     matricula = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    cargo = models.ForeignKey(Cargo, on_delete=models.DO_NOTHING)
-    us = models.ForeignKey(US, on_delete=models.DO_NOTHING)
+    cargo = models.ForeignKey(Cargo, on_delete=models.SET_NULL, null=True)
+    us = models.ForeignKey(US, on_delete=models.SET_NULL, null=True)
     email = models.EmailField()
 
     def __str__(self):
         return self.primeiro_nome
 
 class Treinamento(models.Model):
-    titulo =  models.CharField(max_length=25)
+    titulo =  models.CharField(max_length=25, null=False, blank=False, unique=True)
     autor = models.CharField(max_length=20)
     resumo = RichTextField()
     dt_publicacao = models.DateField(auto_now=True)
@@ -90,9 +95,9 @@ class Treinamento(models.Model):
     def __str__(self):
         return self.titulo
 
-class Provas(models.Model):
+class Prova(models.Model):
         nota = models.IntegerField()
-        titulo = models.ForeignKey(Treinamento, on_delete=models.DO_NOTHING)
+        titulo = models.ForeignKey(Treinamento, on_delete=models.SET_NULL, null=True)
         aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
         
         def __str__(self):

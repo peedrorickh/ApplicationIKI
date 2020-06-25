@@ -10,10 +10,10 @@ from django.conf import settings
 app_name = 'webApp'
 
 urlpatterns = [
-    path('home/', RedirectView.as_view(url='/accounts/login/')),
+    path('logon/', RedirectView.as_view(url='/accounts/login/')),
     path('', IndexTemplateView.as_view(), name="index"),
-    path('treinamentos/', views.Treinamentos, name='treinamentos'),
+   # path('treinamento/', views.Treinamento, name='treinamento'),
     path('ckeditor', include('ckeditor_uploader.urls')),
-    path('treinamento/<int>=:treinamento_id>', views.treino),
+   # path('treinamentos/<int>=:treinamento_id>', views.treino),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
