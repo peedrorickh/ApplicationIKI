@@ -1,11 +1,12 @@
 from django.contrib import admin
-from .models import Funcionario, US, Cargo, Treinamento, Prova
+from .models import Funcionario, Controle, DadosBancarios,Treinamento, Prova
 # Register your models here.
 
+
 admin.site.register(Funcionario)
-admin.site.register(Cargo)
+admin.site.register(Controle)
+admin.site.register(DadosBancarios)
 admin.site.register(Treinamento)
-admin.site.register(US)
 admin.site.register(Prova)
 
 
