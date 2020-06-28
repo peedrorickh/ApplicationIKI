@@ -126,6 +126,10 @@ class Funcionario(models.Model):
     funcao = models.CharField(max_length=15)
     status = models.BooleanField()
 
+    class Meta:
+        ordering = ('nome',)
+        verbose_name_plural = 'funcionario'
+
     def __str__(self):
         return self.nome
 

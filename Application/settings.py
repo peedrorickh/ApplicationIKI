@@ -37,13 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'webApp',
+    'widget_tweaks',
     'crispy_forms',
     'ckeditor',
     'ckeditor_uploader',
     'djrichtextfield',
+    'bootstrapform',
+    'webApp',
+
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 WSGI_APPLICATION = 'Application.wsgi.application'
 
