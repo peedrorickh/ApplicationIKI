@@ -4,13 +4,15 @@ from .models import Funcionario
 from crispy_forms.helper import FormHelper
 
 REGIAO = (
-    ('AC', 'AC'),
-    ('AL', 'AL'),
-    ('AP', 'AP'),
-    ('AM', 'AM'),
-    ('BA', 'BA'),
-    ('CE', 'CE'),
-    ('DF', 'DF')
+    ('', ''),
+    ('CENTRO', 'CENTRO'),
+    ('LESTE', 'LESTE'),
+    ('MANTIQUEIRA', 'MANTIQUEIRA'),
+    ('NORTE', 'NORTE'),
+    ('OESTE', 'OESTE'),
+    ('SUL', 'SUL'),
+    ('SUPORTE', 'SUPORTE'),
+    ('TRIÂNGULO', 'TRIÂNGULO')
 
 )
 US = (

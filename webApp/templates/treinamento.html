@@ -1,0 +1,12 @@
+{% extends "webApp/base.html" %}
+
+
+{% block title %}ApplicationIKI {% endblock %}
+
+{% block content %}
+
+   {% for treinamento in treinamento %}
+    {{ treinamento }}
+   {% endfor %}
+
+{% endblock %}

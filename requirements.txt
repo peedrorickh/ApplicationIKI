@@ -7,9 +7,9 @@ django-crispy-forms
 django-js-asset==1.2.2
 django-richtextfield==1.6
 isort==4.3.21
-lazy-object-proxy==1.4.3
+lazy-object-proxy==1.5.0
 mccabe==0.6.1
-Pillow==7.1.2
+Pillow==7.2.0
 pylint==2.5.3
 pytz==2020.1
 six==1.15.0

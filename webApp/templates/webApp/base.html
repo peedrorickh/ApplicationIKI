@@ -1,4 +1,5 @@
 {% load static %}
+{% load auth_extras %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -36,7 +37,7 @@
                  <a class="nav-link" href="{% url 'webApp:index' %}">Página Inicial</a>
              </li>
              <li class="menu-item">
-                 <a class="nav-link" href="{}">Treinamentos</a>
+                 <a class="nav-link" href="{% url 'webApp:post_treinamento' %}">Treinamentos</a>
             </li>
               <li class="nav-item">
                  <a class="nav-link" href="{% url 'login' %}"></a>
@@ -44,21 +45,25 @@
              {% endif %}
             {% if user.is_staff %}
              <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" 
-                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Serviços
-                  </a>
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Serviços</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{% url 'webApp:cadastrar_funcionario' %}">Cadastrar</a>
-                    <a class="dropdown-item" href=""></a>
-                    <div class="dropdown-divider"></div>
+
+                  {% if request.user|in_group:"CreateFun" or user.is_superuser %}
+                    <a class="dropdown-item" href="{% url 'webApp:cadastrar_funcionario' %}">Cadastrar Funcionario</a>
+                  {% endif %}
+
+                  {%  if request.user|in_group:"ADM-RH" or user.is_superuser %}
+                    <a class="dropdown-item" href="{% url 'webApp:adm_rh' %}">ADM/RH</a>
+                  {% endif %}
+
                     <a class="dropdown-item" href=""></a>
               </div>
             </li>
             <li class="nav-item">
                  <a class="nav-link" href=""></a>
             </li>
-            {% endif %}
+          {% endif %}
           </ul>
 
           <ul class="navbar-nav float-right">
