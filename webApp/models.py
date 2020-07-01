@@ -29,6 +29,7 @@ class Funcionario(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Controle(models.Model):
     funcionario = models.CharField(max_length=50)
     matricula = models.CharField(max_length=7)
@@ -53,6 +54,7 @@ class Controle(models.Model):
     def __str__(self):
         return self.matricula
 
+
 class DadosBancarios(models.Model):
     funcionario = models.CharField(max_length=50)
     matricula = models.CharField(max_length=7)
@@ -69,10 +71,11 @@ class DadosBancarios(models.Model):
     def __str__(self):
         return self.matricula
 
+
 class Treinamento(models.Model):
     titulo = models.CharField(max_length=25, null=False, blank=False, unique=True)
     autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    resumo = RichTextField()
+    resumo = RichTextField(max_length=20)
     dt_publicacao = models.DateField(auto_now=True)
     publicacao = RichTextField()
 
@@ -83,9 +86,7 @@ class Treinamento(models.Model):
 class Prova(models.Model):
     nota = models.IntegerField()
     titulo = models.ForeignKey(Treinamento, on_delete=models.SET_NULL, null=True)
-    aluno = models.ForeignKey(Funcionario,  on_delete=models.SET_NULL, null=True)
+    aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return str(self.aluno)
-        
-

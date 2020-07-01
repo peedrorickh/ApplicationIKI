@@ -1,11 +1,11 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, View, ListView, CreateView
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from webApp.forms import FuncionarioForm
-from webApp.models import Funcionario, Treinamento
+from webApp.models import Treinamento
 
 
 @login_required()
@@ -24,19 +24,27 @@ def cadastrar_funcionario(request):
 
     return render(request, 'cadastrar_funcionario.html', {'form': form})
 
-
+# ----- pasta adm -----#
 @login_required()
 def adm_rh(request):
     return render(request, 'adm_rh.html')
 
 
+# ----- listar treinamento -----#
 @login_required()
 def post_treinamento(request):
     treinamento = Treinamento.objects.all()
-    return render(request, 'treinamento.html', {'post_treinamento': treinamento})
+    return render(request, 'treinamento.html', {'treinamento': treinamento})
 
 
-# ---------------- INDEX -----------------------#
+# ----- leitura de treinamento mais detalhado -----#
+@login_required()
+def details_treinamento(request, pk):
+    treinamento = get_object_or_404(Treinamento, pk=pk)
+    return render(request, 'details_treinamento.html', {'treinamento': treinamento})
+
+
+# ---------------- INDEX-HOMEPAGE -----------------------#
 
 class IndexTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'

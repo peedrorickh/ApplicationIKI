@@ -5,8 +5,14 @@
 
 {% block content %}
 
-   {% for treinamento in treinamento %}
-    {{ treinamento }}
-   {% endfor %}
+    {% for treinamento in treinamento %}
+     <div class="post">
+            <div class="date">
+                {{ treinamento.dt_publicacao }}
+            </div>
+            <h2><a href="{% url 'webApp:details_treinamento' pk=treinamento.pk %}">{{ treinamento.titulo }}</a></h2>
+            <p>{{ treinamento.resumo|safe|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
 
 {% endblock %}
