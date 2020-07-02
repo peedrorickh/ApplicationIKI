@@ -6,12 +6,20 @@ from djrichtextfield.models import RichTextField
 
 
 class Funcionario(models.Model):
+    STATUS = (
+                ('',''),
+                ('ON', 'Ativo'),
+                ('AW','Afastado'),
+                ('VAC', 'Férias'),
+                ('OFF','Desligado')
+            )
+
     nome = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11)
+    cpf = models.CharField(max_length=11, null= False, unique= True)
     rg = models.CharField(max_length=10)
     dt_nascimento = models.DateField()
     matricula_iki = models.CharField(max_length=5)
-    matricula_cemig = models.CharField(max_length=7)
+    matricula_cemig = models.CharField(max_length=7, null = False, unique=True)
     regiao = models.CharField(max_length=30)
     us = models.CharField(max_length=30)
     agencia = models.CharField(max_length=30)
@@ -20,17 +28,28 @@ class Funcionario(models.Model):
     email = models.EmailField()
     dt_admissao = models.DateField()
     funcao = models.CharField(max_length=15)
-    status = models.BooleanField()
+    status = models.CharField(max_length=3, choices=STATUS, blank=False, null=False)
 
     class Meta:
         ordering = ('nome',)
         verbose_name_plural = 'funcionario'
 
+    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
-        return self.nome
+        return self.nome + ' ' +'(' +self.matricula_cemig + ')'
 
 
+#------------MODELS CONTROLE ------------#
 class Controle(models.Model):
+
+    #---------CHOICES-----------#
+    YES_NOT = (
+        ('',''),
+        ("S", "Sim"),
+        ("S", "Não"),
+    )
+    
+    #------------MODELS DB CONTROLE ------------#
     funcionario = models.CharField(max_length=50)
     matricula = models.CharField(max_length=7)
     pis = models.CharField(max_length=15)
@@ -47,12 +66,13 @@ class Controle(models.Model):
     folha_ponto = models.BooleanField()
     ferias_inicio = models.DateField()
     termino_ferias = models.DateField()
-    ASO_periodico = models.BooleanField()
-    plano_saude = models.BooleanField()
-    plano_odonto = models.BooleanField()
+    ASO_periodico = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
+    plano_saude = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
+    plano_odonto = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
 
+    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
-        return self.matricula
+        return '('+ self.matricula +')' + ' ' + self.funcionario
 
 
 class DadosBancarios(models.Model):
@@ -65,28 +85,34 @@ class DadosBancarios(models.Model):
     agencia = models.IntegerField()
     conta = models.IntegerField()
     operacao = models.IntegerField()
-    confirmado = models.BooleanField()
+    confirmado = models.DateTimeField(auto_now_add=False)
     numero_card = models.IntegerField()
 
+    #------------RETORNO SELF PARA NOME E MATRICULA ------------
     def __str__(self):
-        return self.matricula
+        return '('+ self.matricula +')' + ' ' + self.funcionario
 
 
 class Treinamento(models.Model):
-    titulo = models.CharField(max_length=25, null=False, blank=False, unique=True)
+    titulo = models.CharField(max_length=25, null=True, blank=False, unique=True)
     autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     resumo = RichTextField(max_length=20)
     dt_publicacao = models.DateField(auto_now=True)
     publicacao = RichTextField()
 
+    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
         return self.titulo
+    
 
 
 class Prova(models.Model):
-    nota = models.IntegerField()
-    titulo = models.ForeignKey(Treinamento, on_delete=models.SET_NULL, null=True)
+   
+    titulo = models.ForeignKey(Treinamento,on_delete=models.SET_NULL,null=True)
     aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
-
+    nota = models.IntegerField()
+    
+    
+    #------------RETORNO SELF PARA NOME  ------------#
     def __str__(self):
         return str(self.aluno)

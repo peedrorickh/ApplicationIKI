@@ -3,6 +3,7 @@ from django import forms
 from .models import Funcionario
 from crispy_forms.helper import FormHelper
 
+
 REGIAO = (
     ('', ''),
     ('CENTRO', 'CENTRO'),
@@ -49,6 +50,7 @@ FUNCAO = (
     ('EQ2', '-02'),
     ('EQ3', '-03')
 )
+
 
 
 class DateInput(forms.DateInput):
@@ -101,8 +103,9 @@ class FuncionarioForm(forms.ModelForm):
     dt_admissao = forms.DateField(label='Data Admissão',
                                   required=True,
                                   )
-    status = forms.BooleanField(label='Ativo?',
-                                required=False
+    status = forms.ChoiceField(label='Status',
+                               choices = Funcionario.STATUS,
+                               required=True,
                                 )
     funcao = forms.ChoiceField(label='Função ',
                                choices=FUNCAO
