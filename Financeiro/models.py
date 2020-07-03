@@ -2,7 +2,7 @@ from django.db import models
 from webApp.models import Funcionario
 
 class Financeiro(models.Model):
-    funcionario = models.CharField(max_length=50)
+    funcionario = models.CharField(max_length=20)
     matricula_cemig = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
     bco_ag_d_sal = models.IntegerField()
     cta_dep_sal = models.IntegerField()
@@ -17,7 +17,8 @@ class Financeiro(models.Model):
     class Meta:
         ordering = ('funcionario',)
         verbose_name_plural = 'financeiro'
+
     #------------RETORNO SELF PARA NOME E MATRICULA ------------
     def __str__(self):
-        return self.matricula
+        return self.matricula_cemig
    
