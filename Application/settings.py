@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'djrichtextfield',
     #'bootstrapform',
     'webApp',
+    'Financeiro'
 
 
 

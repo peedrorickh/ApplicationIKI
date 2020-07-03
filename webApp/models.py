@@ -36,7 +36,7 @@ class Funcionario(models.Model):
 
     #------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
-        return self.nome + ' ' +'(' +self.matricula_cemig + ')'
+        return self.matricula_cemig
 
 
 #------------MODELS CONTROLE ------------#
@@ -71,24 +71,6 @@ class Controle(models.Model):
     plano_odonto = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
 
     #------------RETORNO SELF PARA NOME E MATRICULA ------------#
-    def __str__(self):
-        return '('+ self.matricula +')' + ' ' + self.funcionario
-
-
-class DadosBancarios(models.Model):
-    funcionario = models.CharField(max_length=50)
-    matricula = models.CharField(max_length=7)
-    bco_ag_d_sal = models.IntegerField()
-    cta_dep_sal = models.IntegerField()
-    salario = models.DecimalField(max_digits=5, decimal_places=2)
-    banco = models.CharField(max_length=25)
-    agencia = models.IntegerField()
-    conta = models.IntegerField()
-    operacao = models.IntegerField()
-    confirmado = models.DateTimeField(auto_now_add=False)
-    numero_card = models.IntegerField()
-
-    #------------RETORNO SELF PARA NOME E MATRICULA ------------
     def __str__(self):
         return '('+ self.matricula +')' + ' ' + self.funcionario
 
