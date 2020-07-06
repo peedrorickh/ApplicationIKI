@@ -5,51 +5,70 @@ from django.contrib.auth.models import User
 from djrichtextfield.models import RichTextField
 
 
+class Agencia(models.Model):
+    agencia = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.agencia
+
+
+class Regiao(models.Model):
+    regiao = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.regiao
+
+
+class Us(models.Model):
+    us = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.us
+
+
 class Funcionario(models.Model):
     STATUS = (
-                ('',''),
-                ('ON', 'Ativo'),
-                ('AW','Afastado'),
-                ('VAC', 'Férias'),
-                ('OFF','Desligado')
-            )
+        ('', ''),
+        ('ON', 'Ativo'),
+        ('AW', 'Afastado'),
+        ('VAC', 'Férias'),
+        ('OFF', 'Desligado')
+    )
 
+    matricula_iki = models.CharField(max_length=5, primary_key=True)
     nome = models.CharField(max_length=50)
-    cpf = models.CharField(max_length=11, null= False, unique= True)
+    cpf = models.CharField(max_length=11, null=False, unique=True)
     rg = models.CharField(max_length=10)
     dt_nascimento = models.DateField()
-    matricula_iki = models.CharField(max_length=5)
-    matricula_cemig = models.CharField(max_length=7, null = False, unique=True)
-    regiao = models.CharField(max_length=30)
-    us = models.CharField(max_length=30)
-    agencia = models.CharField(max_length=30)
-    descricao = models.TextField(max_length=40)
+    nome_pai = models.CharField(max_length=30)
+    nome_mae = models.CharField(max_length=30)
+    pis = models.IntegerField()
+    regiao = models.ForeignKey(Regiao, on_delete=models.SET_NULL, null=True)
+    us = models.ForeignKey(Us, on_delete=models.SET_NULL, null=True)
+    agencia = models.ForeignKey(Agencia, on_delete=models.SET_NULL, null=True)
     equipe = models.CharField(max_length=9)
     email = models.EmailField()
-    dt_admissao = models.DateField()
-    funcao = models.CharField(max_length=15)
     status = models.CharField(max_length=3, choices=STATUS, blank=False, null=False)
 
     class Meta:
         ordering = ('nome',)
         verbose_name_plural = 'funcionario'
 
-    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
+    # ------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
         return self.matricula_cemig
 
 
-#------------MODELS CONTROLE ------------#
+# ------------MODELS CONTROLE ------------#
 class Controle(models.Model):
-
-    #---------CHOICES-----------#
+    # ---------CHOICES-----------#
     YES_NOT = (
-        ('',''),
+        ('', ''),
         ("S", "Sim"),
         ("S", "Não"),
     )
-    
-    #------------MODELS DB CONTROLE ------------#
+
+    # ------------MODELS DB CONTROLE ------------#
     funcionario = models.CharField(max_length=50)
     matricula = models.CharField(max_length=7)
     pis = models.CharField(max_length=15)
@@ -70,9 +89,9 @@ class Controle(models.Model):
     plano_saude = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
     plano_odonto = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
 
-    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
+    # ------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
-        return '('+ self.matricula +')' + ' ' + self.funcionario
+        return '(' + self.matricula + ')' + ' ' + self.funcionario
 
 
 class Treinamento(models.Model):
@@ -82,19 +101,16 @@ class Treinamento(models.Model):
     dt_publicacao = models.DateField(auto_now=True)
     publicacao = RichTextField()
 
-    #------------RETORNO SELF PARA NOME E MATRICULA ------------#
+    # ------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
         return self.titulo
-    
 
 
 class Prova(models.Model):
-   
-    titulo = models.ForeignKey(Treinamento,on_delete=models.SET_NULL,null=True)
+    titulo = models.ForeignKey(Treinamento, on_delete=models.SET_NULL, null=True)
     aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
     nota = models.IntegerField()
-    
-    
-    #------------RETORNO SELF PARA NOME  ------------#
+
+    # ------------RETORNO SELF PARA NOME  ------------#
     def __str__(self):
         return str(self.aluno)
