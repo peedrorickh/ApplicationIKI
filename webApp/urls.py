@@ -1,12 +1,13 @@
 from django.urls import path
-# from . import views
+from . import views
 from django.conf.urls import url, include
 
-from . import views
-from .views import IndexTemplateView, cadastrar_funcionario, adm_rh, post_treinamento, details_treinamento
+
+from .views import IndexTemplateView, cadastrar_funcionario, post_treinamento, details_treinamento
 from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from django.conf import settings
+from Financeiro.views import adm_rh
 
 app_name = 'webApp'
 

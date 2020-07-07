@@ -2,7 +2,7 @@ from django.shortcuts import render
 from Financeiro.models import Financeiro
 # Create your views here.
 
-def financeiro(request):
+def adm_rh(request):
     financeiro = Financeiro.objects.all()
-    return render(request, 'webApp/adm_rh.html', {'financeiro': financeiro})
+    return render(request, 'adm_rh.html', {'financeiro': financeiro})
 

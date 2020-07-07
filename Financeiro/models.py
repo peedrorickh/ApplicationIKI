@@ -20,5 +20,5 @@ class Financeiro(models.Model):
 
     #------------RETORNO SELF PARA NOME E MATRICULA ------------
     def __str__(self):
-        return self.matricula_cemig
+        return str(self.matricula_cemig)
    

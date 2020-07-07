@@ -25,9 +25,7 @@ def cadastrar_funcionario(request):
     return render(request, 'cadastrar_funcionario.html', {'form': form})
 
 # ----- pasta adm -----#
-@login_required()
-def adm_rh(request):
-    return render(request, 'adm_rh.html')
+
 
 
 # ----- listar treinamento -----#

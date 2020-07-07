@@ -56,7 +56,7 @@ class Funcionario(models.Model):
 
     # ------------RETORNO SELF PARA NOME E MATRICULA ------------#
     def __str__(self):
-        return self.matricula_cemig
+        return self.matricula_iki
 
 
 # ------------MODELS CONTROLE ------------#
