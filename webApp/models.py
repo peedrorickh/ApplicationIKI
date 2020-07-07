@@ -67,6 +67,16 @@ class Controle(models.Model):
         ("S", "Sim"),
         ("S", "Não"),
     )
+    FOLHA_PONTO = (
+        ('ENT','ENTREGUE'),
+        ('DIA','EM DIA'),
+        ('ATR','COM ATRASO'), 
+        ('PEN','PENDENTE')
+    )
+    PEN_ENT =(
+        ('PEN','PENDENTE'),
+        ('ENT','ENTREGUE')
+    )
 
     # ------------MODELS DB CONTROLE ------------#
     funcionario = models.CharField(max_length=50)
@@ -82,7 +92,10 @@ class Controle(models.Model):
     saldo_mes = models.DecimalField(max_digits=3, decimal_places=2)
     recarregar = models.BooleanField()
     doc_pendente = models.BooleanField()
-    folha_ponto = models.BooleanField()
+    Doc_contratação = models.CharField(max_length=3, choices=PEN_ENT, blank=False, null=False)
+    Doc_admissão = models.CharField(max_length=3 ,choices=PEN_ENT, blank=False, null=False)
+    Doc_demissão = models.CharField(max_length=3 ,choices=PEN_ENT, blank=False, null=False)
+    folha_ponto = models.CharField(max_length=3 ,choices=FOLHA_PONTO, blank=False, null=False)
     ferias_inicio = models.DateField()
     termino_ferias = models.DateField()
     ASO_periodico = models.CharField(max_length=1, choices=YES_NOT, blank=False, null=False)
@@ -95,8 +108,15 @@ class Controle(models.Model):
 
 
 class Treinamento(models.Model):
-    titulo = models.CharField(max_length=25, null=True, blank=False, unique=True)
-    autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    titulo = models.CharField(max_length=25,    
+                              null=True, 
+                              blank=False, 
+                              unique=True
+                              )
+    autor = models.ForeignKey(User, 
+                              on_delete=models.SET_NULL, 
+                              null=True
+                              )
     resumo = RichTextField(max_length=20)
     dt_publicacao = models.DateField(auto_now=True)
     publicacao = RichTextField()
@@ -107,10 +127,29 @@ class Treinamento(models.Model):
 
 
 class Prova(models.Model):
-    titulo = models.ForeignKey(Treinamento, on_delete=models.SET_NULL, null=True)
-    aluno = models.ForeignKey(Funcionario, on_delete=models.SET_NULL, null=True)
+    titulo = models.ForeignKey(Treinamento, 
+                               on_delete=models.SET_NULL, 
+                               null=True
+                               )
+    aluno = models.ForeignKey(Funcionario, 
+                              on_delete=models.SET_NULL,
+                               null=True
+                               )
     nota = models.IntegerField()
 
     # ------------RETORNO SELF PARA NOME  ------------#
     def __str__(self):
         return str(self.aluno)
+
+class Noticia(models.Model):
+    titulo = models.CharField(max_length=55)
+    dt_publicação = models.DateField(auto_now=True)
+    autor = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.SET_NULL, 
+                            null=True
+                            )
+    noticia = RichTextField()
+
+    def __str__(self):
+        return self.titulo
+    

@@ -24,9 +24,6 @@ def cadastrar_funcionario(request):
 
     return render(request, 'cadastrar_funcionario.html', {'form': form})
 
-# ----- pasta adm -----#
-
-
 
 # ----- listar treinamento -----#
 @login_required()
@@ -47,4 +44,10 @@ def details_treinamento(request, pk):
 class IndexTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
+
 # ----------------------------------------------#
+
+@login_required()
+def noticia(request):
+    noticia = Noticia.objects.all()
+    return render(request,'index.html', {'noticia':noticia})

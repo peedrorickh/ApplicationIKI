@@ -3,7 +3,7 @@ from . import views
 from django.conf.urls import url, include
 
 
-from .views import IndexTemplateView, cadastrar_funcionario, post_treinamento, details_treinamento
+from .views import IndexTemplateView, cadastrar_funcionario, post_treinamento, details_treinamento, noticia
 from django.views.generic import RedirectView
 from django.conf.urls.static import static
 from django.conf import settings
@@ -19,5 +19,4 @@ urlpatterns = [
                   path('adm/rh/', adm_rh, name='adm_rh'),
                   path('post/treinamento', post_treinamento, name='post_treinamento'),
                   path('post/<int:pk>/', views.details_treinamento, name='details_treinamento')
-
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
