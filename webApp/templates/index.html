@@ -1,5 +1,6 @@
 {% extends "webApp/base.html" %}
 {% load static %}
+{% load static noticias %}
 
 {% block title %}Página Inicial{% endblock %}
 
@@ -21,7 +22,9 @@
             <img class="first-slide" src="{% static 'website\img\exemplo.png' %}" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
+                {% for noticia in noticoa%}
                 <h1>Manchete</h1>
+                {%endfor%}
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                 <p><a class="btn btn-lg btn-secondary" href="#" role="button">Sign up today</a></p>
               </div>
@@ -62,7 +65,8 @@
       <!-- Mensagens de marketing e outras featurezinhas
       ================================================== -->
       <!-- Envolve o resto da página em outro container, para centralizar todo o conteúdo. -->
-      <div class="container-fluid">         
+      <div class="container-fluid">  
+             
           <div class="col-md-6">
           
             <div class="card flex-md-row mb-4 shadow-sm h-md-250">
@@ -70,25 +74,23 @@
               <div class="card-body d-flex flex-column align-items-start">
                 <a href="#"><strong class="d-inline-block mb-2 text-primary">Noticías</strong></a>
                 <h3 class="mb-1">
-                  <a class="text-dark" href="#">aaa </a>
+                  <a class="text-dark" href="#">{% noticias %}</a>
                 </h3>
                 <div class="mb-1 text-muted">12 de Nov</div>
-                <p class="card-text mb-auto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque placerat diam id ornare pharetra. Nunc et metus et leo varius finibus sed at dolor. Vestibulum posuere lorem diam.</p>
+                <p class="card-text mb-auto">{% noticias %}</p>
                 <a href="#">Continue lendo</a>
               </div>
-              
-            
             </div>
             
           </div>
-          TESTANDO CODIGO AQUI:
-           
-           {% for noticia in noticia %}
-             {{noticia.titulo}}
-           {% endfor %}
-           
-
+          TESTANDO CODIGO AQUI: 
+          {% for noticias in noticias %}
+          <ul>
+            <li>{% noticias %}</li>
+          </ul>
+          {% endfor %}
         </div>
+        
       <div class="container marketing">
         <!-- Três colunas de texto, abaixo do carousel -->
         <hr class="featurette-divider">

@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from webApp.forms import FuncionarioForm
 from webApp.models import Treinamento
+from webApp.models import Noticia
 
 
 @login_required()
@@ -44,10 +45,13 @@ def details_treinamento(request, pk):
 class IndexTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
 
+    def teste(noticia):
+        noticia = Noticia.objects.last()
+        return noticia
 
 # ----------------------------------------------#
 
 @login_required()
 def noticia(request):
     noticia = Noticia.objects.all()
-    return render(request,'index.html', {'noticia':noticia})
+    return render(request,'noticia.html', {'noticia':noticia})

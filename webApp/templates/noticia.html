@@ -1,0 +1,12 @@
+{% extends "webApp/base.html" %}
+{% load static %}
+
+{% block title %}Noticias{% endblock %}
+
+{% block content %}
+
+    {% for noticia in noticia %}
+        {{noticia.titulo}}
+    {%endfor%}
+    
+{% endblock %}
